@@ -1,0 +1,38 @@
+{
+    "title": "Satuan Produk",
+    "icon": "fa fa-percent",
+    "model": "Satuan",
+    "columns": [{
+            "type": "ai"
+        },
+        {
+            "type": "string",
+            "length": 50,
+            "name": "nama_satuan_produk",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "text",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "length": 50,
+            "name": "keterangan_satuan_produk",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "text",
+                "required": 2
+            }
+        },
+        {
+            "type": "timestamps"
+        }
+    ]
+}

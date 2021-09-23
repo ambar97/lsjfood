@@ -1,0 +1,33 @@
+{
+    "title": "Kategori Produk",
+    "icon": "fa fa-list",
+    "model": "Kategori",
+    "columns": [{
+            "type": "ai"
+        },
+        {
+            "type": "string",
+            "length": 50,
+            "name": "nama_kategori",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "text",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "name": "keterangan",
+            "form": {
+                "type": "string",
+                "required": 2
+            }
+        },
+        {
+            "type": "timestamps"
+        }
+    ]
+}

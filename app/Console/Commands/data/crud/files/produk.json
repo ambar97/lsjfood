@@ -1,0 +1,95 @@
+{
+    "title": "Produk",
+    "icon": "fa fa-archive",
+    "model": "Produk",
+    "columns": [{
+            "type": "ai"
+        },
+        {
+            "type": "string",
+            "length": 50,
+            "name": "nama_produk",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "text",
+                "required": 2
+            }
+        },
+        {
+            "type": "number",
+            "name": "isi",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "number",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "name": "harga",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "string",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "name": "satuan",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "select",
+                "required": 2,
+                "options": [""]
+            }
+        },
+        {
+            "type": "string",
+            "name": "keterangan",
+            "form": {
+                "type": "string",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "name": "image",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "image",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "name": "kategori",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "select",
+                "required": 2,
+                "options": [""]
+            }
+        },
+        {
+            "type": "timestamps"
+        }
+    ]
+}

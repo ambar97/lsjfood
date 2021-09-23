@@ -1,0 +1,51 @@
+{
+    "title": "Permintaan Produk",
+    "icon": "fa fa-hand-lizard-o",
+    "model": "Permintaan",
+    "columns": [{
+            "type": "ai"
+        },
+        {
+            "type": "number",
+            "length": 12,
+            "name": "id_permintaan",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "number",
+                "required": 2
+            }
+        },
+        {
+            "type": "number",
+            "length": 12,
+            "name": "id_user",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "number",
+                "required": 2
+            }
+        },
+        {
+            "type": "number",
+            "length": 12,
+            "name": "jumlah_permintaan",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "number",
+                "required": 2
+            }
+        },
+        {
+            "type": "timestamps"
+        }
+    ]
+}

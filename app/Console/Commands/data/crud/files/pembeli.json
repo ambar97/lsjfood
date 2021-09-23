@@ -1,0 +1,78 @@
+{
+    "title": "Pembeli",
+    "icon": "fa fa-archive",
+    "model": "Pembeli",
+    "columns": [{
+            "type": "ai"
+        },
+        {
+            "type": "string",
+            "length": 50,
+            "name": "nama_pembeli",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "text",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "name": "email",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "string",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "name": "no_telp",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "string",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "name": "alamat",
+            "form": {
+                "type": "string",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "name": "foto",
+            "form": {
+                "type": "image"
+            }
+        },
+        {
+            "type": "string",
+            "name": "lat",
+            "form": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "string",
+            "name": "long",
+            "form": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "timestamps"
+        }
+    ]
+}

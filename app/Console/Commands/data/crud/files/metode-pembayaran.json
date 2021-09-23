@@ -1,0 +1,49 @@
+{
+    "title": "Metode Pembayaran",
+    "icon": "fa fa-money",
+    "model": "Metode",
+    "columns": [{
+            "type": "ai"
+        },
+        {
+            "type": "string",
+            "length": 50,
+            "name": "nama_metode",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "text",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "name": "no_rekening",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "string",
+                "required": 2
+            }
+        },
+        {
+            "type": "string",
+            "name": "atas_nama",
+            "validations": {
+                "store": ["required"],
+                "update": ["required"]
+            },
+            "form": {
+                "type": "string",
+                "required": 2
+            }
+        },
+        {
+            "type": "timestamps"
+        }
+    ]
+}
