@@ -23,9 +23,9 @@
             <div class="card-header">
               <h4><i class="fa fa-hand-lizard-o"></i> Data {{ $title }}</h4>
               <div class="card-header-action">
-                {{-- @can('Permintaan Produk Impor Excel') --}}
+                <!-- {{-- @can('Permintaan Produk Impor Excel') --}}
                 @include('includes.form.buttons.btn-import-excel')
-                {{-- @endcan --}}
+                {{-- @endcan --}} -->
                 {{-- @can('Permintaan Produk Tambah') --}}
                 @include('includes.form.buttons.btn-add', ['link'=>route('permintaans.create')])
                 {{-- @endcan --}}
@@ -37,21 +37,23 @@
                   <thead>
                     <tr>
                       <th class="text-center">{{ __('#') }}</th>
-		<th class="text-center">{{ __('Id Permintaan') }}</th>
-		<th class="text-center">{{ __('Id User') }}</th>
-		<th class="text-center">{{ __('Jumlah Permintaan') }}</th>
-
+                      <th class="text-center">{{ __('Id Permintaan') }}</th>
+                      <th class="text-center">{{ __('Jumlah Permintaan') }}</th>
+                      <th class="text-center">{{ __('Tanggal') }}</th>
+                      <th class="text-center">{{ __('Detail Permintaan') }}</th>
+                      <th class="text-center">{{ __('Cetak Form') }}</th>
                       <th>{{ __('Aksi') }}</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach ($data as $item)
                       <tr>
-                        <td>{{ $loop->iteration }}</td>
-		<td>{{ $item->id_permintaan }}</td>
-		<td>{{ $item->id_user }}</td>
-		<td>{{ $item->jumlah_permintaan }}</td>
-
+                        <td class="text-center">{{ $loop->iteration }}</td>
+                        <td class="text-center">{{ $item->id_permintaan }}</td>
+                        <td class="text-center">{{ $item->jumlah_permintaan }} item</td>
+                        <td class="text-center">{{ $item->created_at }}</td>
+                        <td class="text-center"><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal{{$item->id}}"><i class="fa fa-eye"></i></button></td>
+                        <td class="text-center"><a href="{{ route('permintaans.eksport') }}" class="btn btn-primary btn-sm" ><i class="fa fa-print"></i></a></td>
                         <td>
                           {{-- @can('Permintaan Produk Ubah') --}}
                             @include('includes.form.buttons.btn-edit', ['link'=>route('permintaans.edit', [$item->id])])
@@ -67,7 +69,7 @@
             </div>
           </div>
         @else
-          @include('includes.empty-state', ['title'=>'Data '.$title, 'icon'=>'fa fa-hand-lizard-o','link'=>route('permintaans.create')])
+          @include('includes.empty-state', ['title'=>'Data '.$title, 'icon'=>'fa fa-hand-lizard','link'=>route('permintaans.create')])
         @endif
       </div>
 

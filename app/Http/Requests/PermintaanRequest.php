@@ -26,15 +26,15 @@ class PermintaanRequest extends FormRequest
         if ($this->isMethod('put')) {
             return [
 				'id_permintaan' => ["required"],
-				'id_user' => ["required"],
-				'jumlah_permintaan' => ["required"],
+				'nama_barang' => ["required"],
+				'kuantitas' => ["required"],
 
             ];
         }
         return [
 			'id_permintaan' => ["required"],
-			'id_user' => ["required"],
-			'jumlah_permintaan' => ["required"],
+			'nama_barang' => ["required"],
+			'kuantitas' => ["required"],
 
         ];
     }

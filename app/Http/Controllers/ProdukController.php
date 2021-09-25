@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProdukRequest;
 use App\Models\Produk;
+use App\Models\Kategori;
+use App\Models\SessionModel;
+use App\Models\Satuan;
 use App\Repositories\ProdukRepository;
 use App\Services\FileService;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class ProdukController extends Controller
 {
@@ -49,6 +54,7 @@ class ProdukController extends Controller
      */
     public function index()
     {
+        // dd(storage_path());
         return view('produk.index', [
             'data' => $this->produkRepository->getLatest(),
         ]);
@@ -61,8 +67,10 @@ class ProdukController extends Controller
      */
     public function create()
     {
+        // dd(KategoriProduk::all());
         return view('produk.form', [
-
+            'kategori'=> Kategori::all(),
+            'satuan'=>Satuan::all(),
         ]);
     }
 
@@ -79,9 +87,12 @@ class ProdukController extends Controller
                 $request->only([
                     'nama_produk', 'isi', 'harga', 'satuan', 'keterangan', 'kategori', 
                 ]),
-                 ['image' => $this->fileService->uploadProduks($request->file('image'))],
+                ['image' => $this->fileService->uploadProduks($request->file('image'))],
             )
         );
+        $teks = 'insert data nama_produk ='. $request->nama_produk .', isi ='. $request->isi.', harga='. $request->harga.' satuan='. Satuan::where('id',$request->satuan)->first()->nama_satuan.', kategori='. Kategori::where('id',$request->kategori)->first()->nama_kategori .', keterangan='. $request->keterangan;
+        $ses = new SessionModel(); 
+        $ses->insertSession('Tambah Produk', $teks,'null');
         return redirect('/produks')->with('successMessage', __('Berhasil menambah data'));
     }
 
@@ -93,8 +104,11 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
+        
         return view('produk.form', [
             'd' => $produk,
+            'kategori'=> Kategori::all(),
+            'satuan'=> Satuan::all(),
         ]);
     }
 
@@ -111,9 +125,9 @@ class ProdukController extends Controller
             $this->produkRepository->update(
                 array_merge(
                     $request->only([
-                        'nama_produk', 'isi', 'harga', 'satuan', 'keterangan','kategori', 
+                        'nama_produk', 'isi', 'harga', 'satuan', 'keterangan', 'kategori', 
                     ]),
-                    ['image' => $this->fileService->uploadProduks($request->file('image'))],
+                     ['image' => $this->fileService->uploadProduks($request->file('image'))],
                 ),
                 $produk->id
             );
@@ -122,7 +136,7 @@ class ProdukController extends Controller
                 array_merge(
                     $request->only([
                         'nama_produk', 'isi', 'harga', 'satuan', 'keterangan', 'kategori', 
-                    ])
+                    ]),
                 ),
                 $produk->id
             );

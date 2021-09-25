@@ -38,13 +38,13 @@
                   <thead>
                     <tr>
                       <th class="text-center">{{ __('#') }}</th>
-		<th class="text-center">{{ __('Nama Produk') }}</th>
-		<th class="text-center">{{ __('Isi') }}</th>
-		<th class="text-center">{{ __('Harga') }}</th>
-		<th class="text-center">{{ __('Satuan') }}</th>
-		<th class="text-center">{{ __('Keterangan') }}</th>
-		<th class="text-center">{{ __('Image') }}</th>
-		<th class="text-center">{{ __('Kategori') }}</th>
+                      <th class="text-center">{{ __('Nama Produk') }}</th>
+                      <th class="text-center">{{ __('Isi') }}</th>
+                      <th class="text-center">{{ __('Harga') }}</th>
+                      <th class="text-center">{{ __('Satuan') }}</th>
+                      <th class="text-center">{{ __('Keterangan') }}</th>
+                      <th class="text-center">{{ __('Image') }}</th>
+                      <th class="text-center">{{ __('Kategori') }}</th>
 
                       <th>{{ __('Aksi') }}</th>
                     </tr>
@@ -53,13 +53,19 @@
                     @foreach ($data as $item)
                       <tr>
                         <td>{{ $loop->iteration }}</td>
-		<td>{{ $item->nama_produk }}</td>
-		<td>{{ $item->isi }}</td>
-		<td>{{ $item->harga }}</td>
-		<td>{{ $item->satuan }}</td>
-		<td>{{ $item->keterangan }}</td>
-		<td>{{ $item->image }}</td>
-		<td>{{ $item->kategori }}</td>
+                        <td>{{ $item->nama_produk }}</td>
+                        <td>{{ $item->isi }}</td>
+                        <td>{{ $item->harga }}</td>
+                        <td>
+                          {{ App\Models\Satuan::where('id',$item->satuan)->first()->nama_satuan_produk; }}
+                        </td>
+                        <td>{{ $item->keterangan }}</td>
+                        <td>
+                          <img src="{{ storage_path('app/public/produks/'.$item->image) }}" style="width:80px" alt="">
+                        </td>
+                        <td>
+                          {{ App\Models\Kategori::where('id',$item->kategori)->first()->nama_kategori; }}  
+                        </td>
 
                         <td>
                           {{-- @can('Produk Ubah') --}}
@@ -94,6 +100,7 @@
 
 @push('scripts')
   <script>
+
 
   </script>
 @endpush

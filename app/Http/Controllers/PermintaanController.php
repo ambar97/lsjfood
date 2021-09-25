@@ -9,6 +9,10 @@ use App\Services\FileService;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use App\Helpers\Helper;
+use Illuminate\Http\Request;
+use PDF;
+
+
 
 class PermintaanController extends Controller
 {
@@ -62,29 +66,15 @@ class PermintaanController extends Controller
     public function create()
     {
         return view('permintaan.form', [
-
+           
         ]);
     }
 
-    /**
-     * save new data to db
-     *
-     * @param PermintaanRequest $request
-     * @return Response
-     */
-    public function store(PermintaanRequest $request)
+    
+    public function store(Request $request)
     {
-        $this->permintaanRepository->create(
-            array_merge(
-                [
-
-                ],
-                $request->only([
-                    'id_permintaan', 'id_user', 'jumlah_permintaan', 
-                ])
-            )
-        );
-        return redirect()->back()->with('successMessage', __('Berhasil menambah data'));
+        $this->permintaanRepository->insert($request);
+        return redirect('/permintaans')->with('successMessage', __('Berhasil menambah data'));
     }
 
     /**
@@ -93,10 +83,11 @@ class PermintaanController extends Controller
      * @param Permintaan $permintaan
      * @return Response
      */
-    public function edit(Permintaan $permintaan)
+    public function edit($permintaan)
     {
         return view('permintaan.form', [
-            'd' => $permintaan,
+            'd'=> $this->permintaanRepository->getPermintaan($permintaan),
+            'data' => $this->permintaanRepository->getDetail($permintaan),
         ]);
     }
 
@@ -107,19 +98,9 @@ class PermintaanController extends Controller
      * @param Permintaan $permintaan
      * @return Response
      */
-    public function update(PermintaanRequest $request, Permintaan $permintaan)
+    public function update(Request $request)
     {
-        $this->permintaanRepository->update(
-            array_merge(
-                [
-
-                ],
-                $request->only([
-                    'id_permintaan', 'id_user', 'jumlah_permintaan', 
-                ])
-            ),
-            $permintaan->id
-        );
+        $this->permintaanRepository->updateDetail($request);
         return redirect()->back()->with('successMessage', __('Berhasil memperbarui data'));
     }
 
@@ -132,6 +113,7 @@ class PermintaanController extends Controller
     public function destroy(Permintaan $permintaan)
     {
         $this->permintaanRepository->delete($permintaan->id);
+        $this->permintaanRepository->deleteDetail($permintaan->id);
         return redirect()->back()->with('successMessage', __('Berhasil menghapus data'));
     }
 
@@ -160,5 +142,16 @@ class PermintaanController extends Controller
         ]);
         Excel::import(new \App\Imports\PermintaanImport, $request->file('import_file'));
         return Helper::redirectSuccess(route('permintaans.index'), __('Impor berhasil dilakukan'));
+    }
+
+    public function eksport()
+    {
+        $data = [
+            'title' => 'Welcome to ItSolutionStuff.com',
+            'date' => date('m/d/Y')
+        ];
+          
+        $pdf = PDF::loadView('pdf/mypdf', $data);
+        return $pdf->stream();
     }
 }

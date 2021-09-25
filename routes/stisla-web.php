@@ -68,6 +68,7 @@ Route::middleware([
         Route::get('pembelis/maps/{id}', [\App\Http\Controllers\PembeliController::class, 'maps'])->name('pembelis.maps');
     #Permintaan Produk
         Route::get('permintaans/import-excel-example', [\App\Http\Controllers\PermintaanController::class, 'importExcelExample'])->name('permintaans.import-excel-example');
+        Route::get('permintaans/export-pdf', [\App\Http\Controllers\PermintaanController::class, 'eksport'])->name('permintaans.eksport');
         Route::post('permintaans/import-excel', [\App\Http\Controllers\PermintaanController::class, 'importExcel'])->name('permintaans.import-excel');
         Route::resource('permintaans', \App\Http\Controllers\PermintaanController::class);
         
